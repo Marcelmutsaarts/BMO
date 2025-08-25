@@ -167,19 +167,19 @@ export const fysiekeTesten: TestDefinition[] = [
     benchmarks: {
       man: [
         { min: -Infinity, max: 9.1, label: 'Zeer goed', color: '#10b981' },
-        { min: 9.1, max: 9.6, label: 'Goed', color: '#34d399' },
-        { min: 9.6, max: 10.2, label: 'Gemiddeld', color: '#86efac' },
-        { min: 10.2, max: 11.0, label: 'Zwak', color: '#fbbf24' },
-        { min: 11.0, max: 11.9, label: 'Zwak', color: '#fb923c' },
-        { min: 11.9, max: Infinity, label: 'Zeer zwak', color: '#ef4444' }
+        { min: 9.11, max: 9.6, label: 'Goed', color: '#34d399' },
+        { min: 9.61, max: 10.2, label: 'Gemiddeld', color: '#86efac' },
+        { min: 10.21, max: 11.0, label: 'Zwak', color: '#fbbf24' },
+        { min: 11.01, max: 11.9, label: 'Zwak', color: '#fb923c' },
+        { min: 11.91, max: Infinity, label: 'Zeer zwak', color: '#ef4444' }
       ],
       vrouw: [
         { min: -Infinity, max: 9.7, label: 'Zeer goed', color: '#10b981' },
-        { min: 9.7, max: 10.3, label: 'Goed', color: '#34d399' },
-        { min: 10.3, max: 11.0, label: 'Gemiddeld', color: '#86efac' },
-        { min: 11.0, max: 11.8, label: 'Zwak', color: '#fbbf24' },
-        { min: 11.8, max: 12.6, label: 'Zwak', color: '#fb923c' },
-        { min: 12.6, max: Infinity, label: 'Zeer zwak', color: '#ef4444' }
+        { min: 9.71, max: 10.3, label: 'Goed', color: '#34d399' },
+        { min: 10.31, max: 11.0, label: 'Gemiddeld', color: '#86efac' },
+        { min: 11.01, max: 11.8, label: 'Zwak', color: '#fbbf24' },
+        { min: 11.81, max: 12.6, label: 'Zwak', color: '#fb923c' },
+        { min: 12.61, max: Infinity, label: 'Zeer zwak', color: '#ef4444' }
       ]
     }
   }

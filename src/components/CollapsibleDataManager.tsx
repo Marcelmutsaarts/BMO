@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTestContext } from '../context/TestContext';
+import AnoniemUpload from './AnoniemUpload';
 import '../styles/CollapsibleDataManager.css';
 
 export default function CollapsibleDataManager() {
@@ -126,6 +127,8 @@ export default function CollapsibleDataManager() {
             onChange={handleFileChange}
             style={{ display: 'none' }}
           />
+
+          <AnoniemUpload />
         </div>
       )}
     </div>

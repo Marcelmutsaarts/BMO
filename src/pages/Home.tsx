@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DataManager from '../components/DataManager';
+import CollapsibleDataManager from '../components/CollapsibleDataManager';
 import '../styles/Home.css';
 
 const Home: React.FC = () => {
@@ -11,11 +11,8 @@ const Home: React.FC = () => {
         <p className="intro-text">
           Welkom bij de BMO app voor eerste jaars ALO studenten. 
           Ontdek het model van motorisch leren dat de HAN-ALO gebruikt.
-          Klik op een van de onderstaande onderdelen om meer te leren.
         </p>
       </header>
-
-      <DataManager />
       
       <div className="navigation-cards">
         <Link to="/fundamentele-beweegvaardigheden" className="nav-card">
@@ -39,6 +36,8 @@ const Home: React.FC = () => {
           </div>
         </Link>
       </div>
+
+      <CollapsibleDataManager />
     </div>
   );
 };

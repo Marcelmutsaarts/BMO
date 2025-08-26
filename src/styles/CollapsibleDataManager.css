@@ -1,0 +1,202 @@
+/* Collapsible Data Manager Styles */
+.collapsible-data-manager {
+  margin: 20px 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.collapsible-toggle {
+  width: 100%;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.collapsible-toggle:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+.toggle-icon {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.toggle-text {
+  flex: 1;
+  text-align: left;
+}
+
+.data-badge {
+  padding: 4px 10px;
+  background: #667eea;
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.collapsible-content {
+  padding: 20px;
+  background: white;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.data-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.action-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.export-btn:hover:not(:disabled) {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.import-btn:hover {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.clear-btn:hover:not(:disabled) {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-icon {
+  font-size: 20px;
+}
+
+.button-text {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.data-info {
+  padding: 12px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border-left: 3px solid #0ea5e9;
+}
+
+.info-item {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #334155;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .collapsible-data-manager {
+    margin: 12px 0;
+    border-radius: 8px;
+  }
+  
+  .collapsible-toggle {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .data-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  
+  .collapsible-content {
+    padding: 16px;
+  }
+  
+  .data-actions {
+    gap: 8px;
+  }
+  
+  .action-button {
+    padding: 10px 6px;
+  }
+  
+  .button-icon {
+    font-size: 18px;
+  }
+  
+  .button-text {
+    font-size: 11px;
+  }
+}
+
+/* Compact mode for mobile */
+@media (max-width: 480px) {
+  .collapsible-data-manager {
+    margin: 8px 0;
+  }
+  
+  .collapsible-toggle {
+    padding: 10px 12px;
+  }
+  
+  .data-actions {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  
+  .button-text {
+    display: none; /* Hide text on very small screens */
+  }
+  
+  .action-button {
+    padding: 12px;
+  }
+  
+  .button-icon {
+    font-size: 22px;
+  }
+}

@@ -4,6 +4,7 @@ import { useTestContext } from '../context/TestContext';
 import GeslachtSelectie from '../components/GeslachtSelectie';
 import TestCard from '../components/TestCard';
 import TestSelector from '../components/TestSelector';
+import VideoPlayer from '../components/VideoPlayer';
 import { fysiekeTesten } from '../data/testBenchmarks';
 import '../styles/Pages.css';
 
@@ -70,6 +71,11 @@ const Beweegcondities: React.FC = () => {
           </div>
         ))}
       </div>
+
+      <VideoPlayer 
+        title="Protocol Fysieke Testen"
+        description="Bekijk deze instructievideo voor de correcte uitvoering van alle fysieke testen"
+      />
 
       <div className="test-section">
         <button

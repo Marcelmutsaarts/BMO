@@ -7,9 +7,16 @@ export interface TestResult {
   evaluatie: string;
 }
 
+export interface BLOCResult {
+  testId: string;
+  scores: any;
+  datum: Date;
+}
+
 export interface UserData {
   geslacht: 'man' | 'vrouw' | null;
   testResultaten: TestResult[];
+  blocResultaten?: BLOCResult[];
 }
 
 interface TestContextType {
@@ -18,6 +25,8 @@ interface TestContextType {
   addTestResult: (result: TestResult) => void;
   updateTestResult: (testId: string, score: number) => void;
   getTestResult: (testId: string) => TestResult | undefined;
+  addBLOCResult: (testId: string, scores: any) => void;
+  getBLOCResult: (testId: string) => BLOCResult | undefined;
   clearAllData: () => void;
   exportData: () => string;
   importData: (jsonString: string) => boolean;
@@ -37,12 +46,18 @@ export function TestProvider({ children }: { children: ReactNode }) {
           ...result,
           datum: new Date(result.datum)
         }));
+        if (parsed.blocResultaten) {
+          parsed.blocResultaten = parsed.blocResultaten.map((result: any) => ({
+            ...result,
+            datum: new Date(result.datum)
+          }));
+        }
         return parsed;
       } catch {
-        return { geslacht: null, testResultaten: [] };
+        return { geslacht: null, testResultaten: [], blocResultaten: [] };
       }
     }
-    return { geslacht: null, testResultaten: [] };
+    return { geslacht: null, testResultaten: [], blocResultaten: [] };
   });
 
   useEffect(() => {
@@ -73,8 +88,28 @@ export function TestProvider({ children }: { children: ReactNode }) {
     return userData.testResultaten.find(r => r.testId === testId);
   };
 
+  const addBLOCResult = (testId: string, scores: any) => {
+    const newResult: BLOCResult = {
+      testId,
+      scores,
+      datum: new Date()
+    };
+    
+    setUserData(prev => ({
+      ...prev,
+      blocResultaten: [
+        ...(prev.blocResultaten || []).filter(r => r.testId !== testId),
+        newResult
+      ]
+    }));
+  };
+
+  const getBLOCResult = (testId: string) => {
+    return userData.blocResultaten?.find(r => r.testId === testId);
+  };
+
   const clearAllData = () => {
-    setUserData({ geslacht: null, testResultaten: [] });
+    setUserData({ geslacht: null, testResultaten: [], blocResultaten: [] });
   };
 
   const exportData = () => {
@@ -88,6 +123,12 @@ export function TestProvider({ children }: { children: ReactNode }) {
         ...result,
         datum: new Date(result.datum)
       }));
+      if (parsed.blocResultaten) {
+        parsed.blocResultaten = parsed.blocResultaten.map((result: any) => ({
+          ...result,
+          datum: new Date(result.datum)
+        }));
+      }
       setUserData(parsed);
       return true;
     } catch {
@@ -102,6 +143,8 @@ export function TestProvider({ children }: { children: ReactNode }) {
       addTestResult,
       updateTestResult,
       getTestResult,
+      addBLOCResult,
+      getBLOCResult,
       clearAllData,
       exportData,
       importData

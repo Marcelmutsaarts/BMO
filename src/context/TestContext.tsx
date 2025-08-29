@@ -13,10 +13,16 @@ export interface BLOCResult {
   datum: Date;
 }
 
+export interface GrondvormenResult {
+  scores: { [key: number]: boolean | null };
+  datum: Date;
+}
+
 export interface UserData {
   geslacht: 'man' | 'vrouw' | null;
   testResultaten: TestResult[];
   blocResultaten?: BLOCResult[];
+  grondvormenResultaten?: GrondvormenResult;
 }
 
 interface TestContextType {
@@ -27,6 +33,8 @@ interface TestContextType {
   getTestResult: (testId: string) => TestResult | undefined;
   addBLOCResult: (testId: string, scores: any) => void;
   getBLOCResult: (testId: string) => BLOCResult | undefined;
+  addGrondvormenResult: (scores: { [key: number]: boolean | null }) => void;
+  getGrondvormenResult: () => GrondvormenResult | undefined;
   clearAllData: () => void;
   exportData: () => string;
   importData: (jsonString: string) => boolean;
@@ -52,12 +60,18 @@ export function TestProvider({ children }: { children: ReactNode }) {
             datum: new Date(result.datum)
           }));
         }
+        if (parsed.grondvormenResultaten) {
+          parsed.grondvormenResultaten = {
+            ...parsed.grondvormenResultaten,
+            datum: new Date(parsed.grondvormenResultaten.datum)
+          };
+        }
         return parsed;
       } catch {
-        return { geslacht: null, testResultaten: [], blocResultaten: [] };
+        return { geslacht: null, testResultaten: [], blocResultaten: [], grondvormenResultaten: undefined };
       }
     }
-    return { geslacht: null, testResultaten: [], blocResultaten: [] };
+    return { geslacht: null, testResultaten: [], blocResultaten: [], grondvormenResultaten: undefined };
   });
 
   useEffect(() => {
@@ -108,8 +122,24 @@ export function TestProvider({ children }: { children: ReactNode }) {
     return userData.blocResultaten?.find(r => r.testId === testId);
   };
 
+  const addGrondvormenResult = (scores: { [key: number]: boolean | null }) => {
+    const newResult: GrondvormenResult = {
+      scores,
+      datum: new Date()
+    };
+    
+    setUserData(prev => ({
+      ...prev,
+      grondvormenResultaten: newResult
+    }));
+  };
+
+  const getGrondvormenResult = () => {
+    return userData.grondvormenResultaten;
+  };
+
   const clearAllData = () => {
-    setUserData({ geslacht: null, testResultaten: [], blocResultaten: [] });
+    setUserData({ geslacht: null, testResultaten: [], blocResultaten: [], grondvormenResultaten: undefined });
   };
 
   const exportData = () => {
@@ -129,6 +159,12 @@ export function TestProvider({ children }: { children: ReactNode }) {
           datum: new Date(result.datum)
         }));
       }
+      if (parsed.grondvormenResultaten) {
+        parsed.grondvormenResultaten = {
+          ...parsed.grondvormenResultaten,
+          datum: new Date(parsed.grondvormenResultaten.datum)
+        };
+      }
       setUserData(parsed);
       return true;
     } catch {
@@ -145,6 +181,8 @@ export function TestProvider({ children }: { children: ReactNode }) {
       getTestResult,
       addBLOCResult,
       getBLOCResult,
+      addGrondvormenResult,
+      getGrondvormenResult,
       clearAllData,
       exportData,
       importData

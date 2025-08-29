@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import GrondvormenTest from '../components/GrondvormenTest';
 import '../styles/Pages.css';
 
 const FundamenteleBeweegvaardigheden: React.FC = () => {
+  const [showGrondvormenTest, setShowGrondvormenTest] = useState(false);
+  
   const locomotie = [
     'Lopen', 'Rennen', 'Hinken', 'Huppen', 'Springen',
     'Rollen', 'Galopperen', 'Klimmen', 'Glijden', 'Skippen'
@@ -57,6 +60,33 @@ const FundamenteleBeweegvaardigheden: React.FC = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="test-section">
+        <button
+          onClick={() => setShowGrondvormenTest(!showGrondvormenTest)}
+          className="toggle-button"
+          style={{
+            margin: '30px auto',
+            display: 'block',
+            padding: '15px 30px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          {showGrondvormenTest ? '▼' : '▶'} Test Grondvormen van Bewegen
+        </button>
+
+        {showGrondvormenTest && (
+          <div className="test-container">
+            <GrondvormenTest />
+          </div>
+        )}
       </div>
     </div>
   );
